@@ -19,11 +19,13 @@
 1. Клонировать репозиторий:
 ```bash
 git clone https://github.com/LizaVeremeva/web-4
-cd nginx-lab```
+cd nginx-lab
+```
 Запустить контейнеры:
 
 ```bash
-docker-compose up -d --build```
+docker-compose up -d --build
+```
 Открыть в браузере:
 
 Главная страница: ```http://localhost:8080```
