@@ -89,6 +89,33 @@
             </ul>
         </div>
 
+        <!-- Блок с достопримечательностями из API -->
+        <?php if(isset($_SESSION['api_data'])): ?>
+            <div style="margin-top: 40px; border: 2px solid #FF9800; border-radius: 10px; padding: 20px; background: #fffaf0;">
+                <h2 style="color: #FF9800;"> Достопримечательности Калининграда:</h2>
+                <?php 
+                if(isset($_SESSION['api_data']['error'])) {
+                    echo "<p style='color: red;'>Ошибка загрузки достопримечательностей: " . htmlspecialchars($_SESSION['api_data']['error']) . "</p>";
+                } elseif(isset($_SESSION['api_data']['features']) && !empty($_SESSION['api_data']['features'])) {
+                    $attractions = array_slice($_SESSION['api_data']['features'], 0, 5); // Берем первые 5
+                    foreach($attractions as $attraction): 
+                        $name = $attraction['properties']['name'] ?? 'Без названия';
+                        $kinds = $attraction['properties']['kinds'] ?? '';
+                ?>
+                    <div style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 5px; border-left: 4px solid #FF9800;">
+                        <strong> <?= htmlspecialchars($name) ?></strong><br>
+                        <small> <?= htmlspecialchars(str_replace(',', ', ', $kinds)) ?></small>
+                    </div>
+                <?php 
+                    endforeach; 
+                    echo "<p><small>Данные предоставлены OpenTripMap API</small></p>";
+                } else {
+                    echo "<p>Достопримечательности не найдены</p>";
+                }
+                ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Текущее время (как было в старом файле) -->
         <p style="margin-top: 30px; color: #666;">Текущее время: <span id="time"></span></p>
     </div>

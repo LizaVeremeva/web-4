@@ -85,6 +85,13 @@ $_SESSION['last_booking'] = [
 $data_line = date('Y-m-d H:i:s') . "|" . $name . "|" . $date . "|" . $route . "|" . $audio_guide . "|" . $language . "\n";
 file_put_contents("bookings.txt", $data_line, FILE_APPEND);
 
+// GitHub API - получаем репозитории
+require_once 'ApiClient.php';
+$api = new ApiClient();
+$url = 'https://api.opentripmap.com/0.1/en/places/radius?radius=3000&lon=37.6173&lat=55.7558&apikey=5ae2e3f221c38a28845f05b6';
+$apiData = $api->request($url);
+$_SESSION['api_data'] = $apiData;
+
 // Перенаправляем пользователя на главную страницу
 header("Location: index.php");
 exit();
