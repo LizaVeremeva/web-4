@@ -92,6 +92,9 @@ $url = 'https://api.opentripmap.com/0.1/en/places/radius?radius=3000&lon=37.6173
 $apiData = $api->request($url);
 $_SESSION['api_data'] = $apiData;
 
+// Сохраняем время отправки формы в куки (на 1 час)
+setcookie("last_submission", date('Y-m-d H:i:s'), time() + 3600, "/");
+
 // Перенаправляем пользователя на главную страницу
 header("Location: index.php");
 exit();

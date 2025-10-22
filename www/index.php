@@ -68,6 +68,31 @@
             </div>
         <?php endif; ?>
 
+        <!-- Информация о пользователе -->
+        <?php
+        require_once 'UserInfo.php';
+        $info = UserInfo::getInfo();
+        ?>
+        <div style="margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 5px; border-left: 4px solid #2196F3;">
+            <h3 style="margin-top: 0; color: #1976D2;"> Информация о посетителе:</h3>
+            <?php foreach($info as $key => $val): ?>
+                <p style="margin: 5px 0;">
+                    <strong><?= htmlspecialchars($key) ?>:</strong> 
+                    <?= htmlspecialchars($val) ?>
+                </p>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Информация о последней отправке формы из куки -->
+        <?php if(isset($_COOKIE['last_submission'])): ?>
+            <div style="margin: 20px 0; padding: 15px; background: #f3e5f5; border-radius: 5px; border-left: 4px solid #9C27B0;">
+                <h3 style="margin-top: 0; color: #7B1FA2;">🕒 Ваша последняя запись:</h3>
+                <p style="margin: 5px 0;">
+                    <strong>Время:</strong> <?= htmlspecialchars($_COOKIE['last_submission']) ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
         <!-- Навигация -->
         <nav style="margin: 30px 0; text-align: center;">
             <a href="form.html" class="nav-button" style="background: #4CAF50;">
