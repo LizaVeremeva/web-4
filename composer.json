@@ -9,5 +9,7 @@
             "email": "veremyeva@bk.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.10"
+    }
 }
